@@ -1,0 +1,23 @@
+<div *ngIf="currentQuestion" class="question">
+  <h1 class="question-content">{{ currentQuestion.content }}</h1>
+  <ul class="options">
+    <li *ngFor="let option of currentQuestion.option_list">
+      <h2 [class.selected]="currentQuestion.option_list.indexOf(option) === selectedOptions[currentQuestionIndex]" 
+          class="option" (click)="selectOption(option)">
+      {{ option }}
+    </h2>
+    </li>
+  </ul>
+</div>
+<div *ngIf="currentQuestionIndex > 0" class="prev-button" (click)="prevQuestion()">
+  <h2>Previous</h2>
+</div>
+<div *ngIf="currentQuestionIndex < questions.length-1" class="next-button" (click)="nextQuestion()">
+  <h2>Next</h2>
+</div>
+<div *ngIf="currentQuestionIndex === questions.length-1" class="submit-button" (click)="submitQuiz()">
+  <h2>Submit</h2>
+</div>
+<app-score-card [scoreOnSubmit]="scoreOnSubmit" [scoreModalOpen]="scoreModalOpen"></app-score-card>
+
+

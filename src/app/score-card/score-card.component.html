@@ -1,0 +1,8 @@
+<div *ngIf="scoreModalOpen" class="score-modal">
+    <div class="content">
+        <div class="close" (click)="closeScoreModal()">&times;</div>
+        <h1>Congratulations on completing the quiz!</h1>
+        <h1>Your Score:</h1>
+        <h1>{{scoreOnSubmit}}</h1>
+    </div>
+</div>
