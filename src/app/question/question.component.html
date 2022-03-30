@@ -1,11 +1,18 @@
+<div class="header"><h1>CASHe Quiz</h1></div>
+<app-topics-accordion (selectQuestionNavEvent)="selectQuestionNavEvent($event)" (selectTopicEvent)="selectTopicEvent($event)" [questions]="questions"></app-topics-accordion>
 <div *ngIf="currentQuestion" class="question">
   <h1 class="question-content">{{ currentQuestion.content }}</h1>
   <ul class="options">
-    <li *ngFor="let option of currentQuestion.option_list">
-      <h2 [class.selected]="currentQuestion.option_list.indexOf(option) === selectedOptions[currentQuestionIndex]" 
-          class="option" (click)="selectOption(option)">
-      {{ option }}
-    </h2>
+    <li *ngFor="let option of currentQuestion.option_list" class="option-parent">
+        <label class="option" [class.selected]="currentQuestion.option_list.indexOf(option) === selectedOptions[currentQuestionIndex]">
+          <input type="radio" 
+          [checked]="currentQuestion.option_list.indexOf(option) === selectedOptions[currentQuestionIndex]" 
+          name="options" 
+          id="{{currentQuestion.option_list.indexOf(option)}}" 
+          (click)="selectOption(option)"
+          size="50">
+          {{option}}
+        </label>
     </li>
   </ul>
 </div>
@@ -18,6 +25,6 @@
 <div *ngIf="currentQuestionIndex === questions.length-1" class="submit-button" (click)="submitQuiz()">
   <h2>Submit</h2>
 </div>
-<app-score-card [scoreOnSubmit]="scoreOnSubmit" [scoreModalOpen]="scoreModalOpen"></app-score-card>
+<app-score-card [scoreOnSubmit]="scoreOnSubmit" [scoreModalOpen]="scoreModalOpen" (modalCloseEvent)="modalCloseEvent($event)"></app-score-card>
 
 

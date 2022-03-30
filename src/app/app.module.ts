@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ScoreCardComponent } from './score-card/score-card.component';
+import { TopicsAccordionComponent } from './topics-accordion/topics-accordion.component';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { ScoreCardComponent } from './score-card/score-card.component';
     AppComponent,
     QuestionComponent,
     ScoreCardComponent,
+    TopicsAccordionComponent,
   ],
   imports: [
     BrowserModule,

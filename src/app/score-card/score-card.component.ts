@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-score-card',
@@ -9,7 +9,9 @@ export class ScoreCardComponent implements OnInit {
 
   @Input() scoreOnSubmit?: number;
 
-  @Input() scoreModalOpen?: boolean;
+  @Input() scoreModalOpen?: number;
+
+  @Output() modalCloseEvent = new EventEmitter<string>();
 
   constructor() { }
 
@@ -17,7 +19,8 @@ export class ScoreCardComponent implements OnInit {
   }
 
   closeScoreModal(): void {
-    this.scoreModalOpen = false;
+    this.scoreModalOpen = 0;
+    this.modalCloseEvent.emit(`closed`);
   }
 
 }

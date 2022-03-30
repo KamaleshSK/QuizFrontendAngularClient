@@ -3,7 +3,8 @@ import { Question } from './question/question';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { QuestionTopic } from './question/question_topic';
+import { Topic } from './topics-accordion/topic';
+import { QuestionTopic } from './question/question-topic';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +12,11 @@ import { QuestionTopic } from './question/question_topic';
 export class QuestionService {
 
   private questionsUrl = 'http://localhost:8080/questionnaire/all-active-questions/topic/eager';
+  private topicsUrl = 'http://localhost:8080/questionnaire/all-questionnaires/lazy'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-
-  // temporary 
-  questionTopic: QuestionTopic = {
-    topic: `Competitive_Apps`
-  }
 
   constructor(private http: HttpClient) { }
 
@@ -37,11 +34,19 @@ export class QuestionService {
     };
   }
 
-  getQuestions(): Observable<Question[]> {
-    return this.http.post<Question[]>(this.questionsUrl, this.questionTopic, this.httpOptions)
+  getQuestions(topic: QuestionTopic): Observable<Question[]> {
+    return this.http.post<Question[]>(this.questionsUrl, topic, this.httpOptions)
                 .pipe(
                   tap(_ => console.log('fetched questions by topic')),
                   catchError(this.handleError<Question[]>('getQuestions', []))
+                );
+  }
+
+  getTopics(): Observable<Topic[]> {
+    return this.http.get<Topic[]>(this.topicsUrl)
+                .pipe(
+                  tap(_ => console.log('fetched Topics')),
+                  catchError(this.handleError<Topic[]>('getTopics', []))
                 );
   }
 }

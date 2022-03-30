@@ -1,6 +1,15 @@
+.header {
+  border: 1px solid white;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  padding: 13px 762px;
+  color: white;
+}
+
 .question {
   position: absolute;
-  left: 50%;
+  left: 61%;
   top: 42%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -17,51 +26,49 @@ ul {
 }
 
 .option {
-  color: rgb(39, 37, 90);
-  background-color: white;
-  border: none;
+  color: white;
   padding: 10px 30px;
-  text-align: center;
+  text-align: left;
   text-decoration: none;
   display: block;
-  margin: 20px 0px 20px 0px;
+  margin: 0px 0px 0px 0px;
   cursor: pointer;
   border-radius: 20px;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-.options h2.selected {
-  background-color: rgb(30, 226, 102);
-  color: white;
-  border-style: solid;
-  border-width: 5px;
-  border-color: rgb(197, 173, 246);
+.options label.selected {
+  background-color: rgb(30, 226, 102) !important;
+  color: black;
 }
 
-.options h2:hover {
-  background-color: rgb(30, 226, 102);
-  color: white;
+.options label:hover {
+  background-color: white;
+  color: black;
 }
 
 .prev-button {
   color: rgb(39, 37, 90);
   background-color: white;
   border: none;
-  padding: 5px 60px;
+  padding: 1px 40px;
   text-align: center;
   text-decoration: none;
   display: block;
   cursor: pointer;
   border-radius: 40px;
   position: absolute;
-  left: 5%;
+  left: 31%;
   top: 80%;
+  user-select: none;
+  transition: background-color 0.5s ease, color 0.5 ease;
 }
 
 .next-button {
   color: rgb(39, 37, 90);
   background-color: white;
   border: none;
-  padding: 5px 80px;
+  padding: 1px 60px;
   text-align: center;
   text-decoration: none;
   display: block;
@@ -70,13 +77,15 @@ ul {
   position: absolute;
   left: 82.5%;
   top: 80%;
+  user-select: none;
+  transition: background-color 0.5s ease, color 0.5 ease;
 }
 
 .submit-button {
   color: rgb(39, 37, 90);
   background-color: white;
   border: none;
-  padding: 5px 80px;
+  padding: 1px 50px;
   text-align: center;
   text-decoration: none;
   display: block;
@@ -85,4 +94,20 @@ ul {
   position: absolute;
   left: 82.5%;
   top: 80%;
+  transition: background-color 0.5s ease, color 0.5 ease;
+}
+
+.prev-button:hover {
+  background-color: rgb(30, 226, 102);
+  color: white;
+}
+
+.next-button:hover {
+  background-color: rgb(30, 226, 102);
+  color: white;
+}
+
+.submit-button:hover {
+  background-color: rgb(30, 226, 102);
+  color: white;
 }

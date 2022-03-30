@@ -1,0 +1,12 @@
+<div *ngIf="topics.length" class="topics-accordion">
+    <div class="topic" [class.selectedTopic]="topic === selectedTopic" *ngFor="let topic of topics">
+        <div (click)="selectTopic(topic)">
+            <h2>{{topic.topic}}</h2>
+        </div>
+        <div *ngIf="topic === selectedTopic" class="questions-nav">
+            <div *ngFor="let question of questions" class="question-nav" (click)="selectQuestionNav(question)">
+                <p>{{question.content}}</p>
+            </div>
+        </div>
+    </div>
+</div>
