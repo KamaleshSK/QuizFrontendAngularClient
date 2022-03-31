@@ -1,6 +1,16 @@
 <div class="header"><h1>CASHe Quiz</h1></div>
-<app-topics-accordion (selectQuestionNavEvent)="selectQuestionNavEvent($event)" (selectTopicEvent)="selectTopicEvent($event)" [questions]="questions"></app-topics-accordion>
-<div *ngIf="currentQuestion" class="question">
+<app-topics-accordion (selectQuestionNavEvent)="selectQuestionNavEvent($event)" 
+(selectTopicEvent)="selectTopicEvent($event)" 
+[questions]="questions"
+[selectedOptions]="selectedOptions"
+[readyToStart]="readyToStart"
+></app-topics-accordion>
+<div *ngIf="readyToStart" class="start-button" (click)="startQuiz()"><h2>Start Quiz</h2></div>
+<app-timer *ngIf="currentQuestion && !readyToStart"
+  [readyToStart]="readyToStart" 
+  (countDownEndEmitter)="countDownEndEmitter($event)"
+  ></app-timer>
+<div *ngIf="currentQuestion && !readyToStart" class="question">
   <h1 class="question-content">{{ currentQuestion.content }}</h1>
   <ul class="options">
     <li *ngFor="let option of currentQuestion.option_list" class="option-parent">
@@ -19,10 +29,10 @@
 <div *ngIf="currentQuestionIndex > 0" class="prev-button" (click)="prevQuestion()">
   <h2>Previous</h2>
 </div>
-<div *ngIf="currentQuestionIndex < questions.length-1" class="next-button" (click)="nextQuestion()">
+<div *ngIf="currentQuestionIndex !== -1 && currentQuestionIndex < questions.length-1" class="next-button" (click)="nextQuestion()">
   <h2>Next</h2>
 </div>
-<div *ngIf="currentQuestionIndex === questions.length-1" class="submit-button" (click)="submitQuiz()">
+<div *ngIf="currentQuestionIndex !== -1 && currentQuestionIndex === questions.length-1" class="submit-button" (click)="submitQuiz()">
   <h2>Submit</h2>
 </div>
 <app-score-card [scoreOnSubmit]="scoreOnSubmit" [scoreModalOpen]="scoreModalOpen" (modalCloseEvent)="modalCloseEvent($event)"></app-score-card>

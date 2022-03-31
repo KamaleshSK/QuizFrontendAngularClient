@@ -47,6 +47,23 @@ ul {
   color: black;
 }
 
+.start-button {
+  color: rgb(39, 37, 90);
+  background-color: white;
+  border: none;
+  padding: 1px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  border-radius: 40px;
+  position: absolute;
+  left: 57%;
+  top: 50%;
+  user-select: none;
+  transition: background-color 0.5s ease, color 0.5 ease;
+}
+
 .prev-button {
   color: rgb(39, 37, 90);
   background-color: white;
@@ -95,6 +112,11 @@ ul {
   left: 82.5%;
   top: 80%;
   transition: background-color 0.5s ease, color 0.5 ease;
+}
+
+.start-button:hover {
+  background-color: rgb(30, 226, 102);
+  color: white;
 }
 
 .prev-button:hover {

@@ -1,0 +1,12 @@
+div.timer {
+  position: absolute;
+  top: 15%;
+  left: 84.6%;
+  background-color: inherit;
+  color: white;
+  border: 8px solid white;
+  width: 80px;
+  border-radius: 50px;
+  padding: 20px;
+  text-align: center;
+}

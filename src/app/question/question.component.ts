@@ -15,13 +15,17 @@ export class QuestionComponent implements OnInit {
 
   currentQuestion?: Question;
 
-  currentQuestionIndex: number = 0;
+  currentQuestionIndex: number = -1;
 
   selectedOptions: number[] = [];
 
   scoreOnSubmit?: number;
 
   scoreModalOpen?: number;
+
+  readyToStart: boolean = false;
+
+  currentTopic: string = ""; 
 
   constructor(private questionService: QuestionService,
               private messageService: MessageService) { }
@@ -43,6 +47,12 @@ export class QuestionComponent implements OnInit {
     this.currentQuestionIndex--;
   }
 
+  startQuiz(): void {
+    this.readyToStart = false;
+    this.currentQuestion = this.questions[0];
+    this.currentQuestionIndex = 0;
+  }
+
   submitQuiz(): void {
     let score = 0;
     for (let i=0; i<this.selectedOptions.length; i++) {
@@ -52,12 +62,19 @@ export class QuestionComponent implements OnInit {
     }
     this.scoreOnSubmit = score;
     this.scoreModalOpen = 1;
+    this.readyToStart = true;
+  }
+
+  countDownEndEmitter(event: string) {
+    if (event === `timer-end`) {
+      this.submitQuiz();
+    }
   }
 
   modalCloseEvent(event: string) {
     if (event === `closed`) {
       this.scoreModalOpen = 0;
-      this.resetQuiz();
+      this.resetQuiz(this.currentTopic);
     }
   } 
 
@@ -66,19 +83,21 @@ export class QuestionComponent implements OnInit {
     this.currentQuestionIndex = this.questions.indexOf(this.currentQuestion);
   }
 
-  selectTopicEvent(event: string) {
-    this.getQuestions(event);
-    this.resetQuiz();
+  selectTopicEvent(topic: string) {
+    this.resetQuiz(topic);
+    this.readyToStart = true;
   }
 
-  resetQuiz(): void {
-    this.currentQuestion = this.questions[0];
-    this.currentQuestionIndex = 0;
-    this.scoreOnSubmit = 0;
-    
-    for (let i=0; i<this.selectedOptions.length; i++) {
-      this.selectedOptions[i] = -1;
+  resetQuiz(topic: string): void {
+    if (this.currentTopic === topic) {
+      for (let i=0; i<this.selectedOptions.length; i++) {
+        this.selectedOptions[i] = -1;
+      }
+    } else {
+      this.getQuestions(topic);
     }
+    this.currentQuestionIndex = -1;
+    this.scoreOnSubmit = 0;
   }
 
   getQuestions(topicString: string): void {
@@ -88,7 +107,6 @@ export class QuestionComponent implements OnInit {
     this.questionService.getQuestions(topicBody)
         .subscribe(questions => {
           this.questions = questions;
-          this.currentQuestion = questions[0];
           this.selectedOptions = [];
 
           for (let _ of questions) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { QuestionService } from '../question.service';
 import { Topic } from './topic';
 import { Question } from '../question/question';
@@ -11,6 +11,10 @@ import { Question } from '../question/question';
 export class TopicsAccordionComponent implements OnInit {
 
   @Input() questions?: Question[];
+
+  @Input() selectedOptions?: number[];
+
+  @Input() readyToStart: boolean = false;
 
   topics: Topic[] = [];
 
@@ -27,8 +31,10 @@ export class TopicsAccordionComponent implements OnInit {
   }
 
   selectTopic(topic: Topic): void {
-    this.selectedTopic = topic;
-    this.selectTopicEvent.emit(this.selectedTopic.topic);
+    if (topic !== this.selectedTopic) {
+      this.selectedTopic = topic;
+      this.selectTopicEvent.emit(topic.topic);
+    }
   }
 
   selectQuestionNav(question: Question): void {
@@ -39,7 +45,6 @@ export class TopicsAccordionComponent implements OnInit {
     this.questionService.getTopics()
         .subscribe(topics => {
           this.topics = topics;
-          // this.selectTopic(topics[0]);
         });
   }
 

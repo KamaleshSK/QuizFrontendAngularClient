@@ -6,6 +6,7 @@ import { QuestionComponent } from './question/question.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ScoreCardComponent } from './score-card/score-card.component';
 import { TopicsAccordionComponent } from './topics-accordion/topics-accordion.component';
+import { TimerComponent } from './timer/timer.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { TopicsAccordionComponent } from './topics-accordion/topics-accordion.co
     QuestionComponent,
     ScoreCardComponent,
     TopicsAccordionComponent,
+    TimerComponent,
   ],
   imports: [
     BrowserModule,

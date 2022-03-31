@@ -16,13 +16,13 @@
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-.topic div {
+.topic {
   user-select: none;
   cursor: pointer;
 }
 
 .topics-accordion div.selectedTopic {
-  background-color: rgb(30, 226, 102);
+  background-color: white;
   color: rgb(39, 37, 90);
 }
 
@@ -37,11 +37,23 @@
   margin: 0px 0px 0px -16px;
 }
 
+.questions-nav div.selected {
+  background-color: rgb(30, 226, 102);
+  color: black;
+}
+
 .question-nav {
   cursor: pointer;
   border: 1px solid white;
   height: 50px;
   overflow-y: clip;
+  color: white;
+}
+
+.question-nav:hover {
+  background-color: white;
+  color: rgb(39, 37, 90);
+  border: 1px solid inherit;
 }
 
 .question-nav p {
@@ -51,4 +63,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   padding-right: 15px;
+  padding-left: 15px;
+  background-color: inherit;
+  color: inherit;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
